@@ -22,6 +22,7 @@ export class AddItemFormComponent implements OnInit {
   //send forms value to any listener
   onSubmit(form: NgForm) {
     this.formSubmit.emit(form.value)
+    form.reset();
   }
 
 }

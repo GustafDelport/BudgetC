@@ -16,4 +16,4 @@
 
 <hr style="margin-top: 0;">
 
-<app-budget-item-list [budgetItems]="BudgetItems"></app-budget-item-list>
+<app-budget-item-list [budgetItems]="BudgetItems" (delete)="deleteItem($event)" ></app-budget-item-list>
