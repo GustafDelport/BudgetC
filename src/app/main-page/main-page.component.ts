@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BudgetItem } from 'src/shared/models/budget-item-model';
+import { ItemsService } from 'src/shared/services/items.service';
 import { UpdateEvent } from '../budget-item-list/budget-item-list.component';
 
 @Component({
@@ -9,31 +10,34 @@ import { UpdateEvent } from '../budget-item-list/budget-item-list.component';
 })
 export class MainPageComponent implements OnInit {
 
-  BudgetItems: BudgetItem[] = new Array<BudgetItem>();
+  BudgetItems: BudgetItem[];
   totalBudget: number = 0;
 
-  constructor() { }
+  constructor(private itemService: ItemsService) {
+    this.loadData(); 
+  }
 
   ngOnInit(): void {
   }
 
   addItem(newItem: BudgetItem) {
-    this.BudgetItems.push(newItem);
-    this.totalBudget += newItem.amount;
+    this.itemService.addItem(newItem);
   }
 
   deleteItem(item: BudgetItem) {
-    let idex = this.BudgetItems.indexOf(item);
-    this.BudgetItems.splice(idex,1);
+    this.itemService.deleteItem(item);
     this.totalBudget -= item.amount;
   }
 
   updateItem(updateEvent: UpdateEvent) {
-    this.BudgetItems[this.BudgetItems.indexOf(updateEvent.old)] = updateEvent.new;
+    this.itemService.updateItem(updateEvent);
 
     this.totalBudget -= updateEvent.old.amount;
     this.totalBudget += updateEvent.new.amount;
+  }
 
+  loadData(){
+    this.BudgetItems = this.itemService.getItems()
   }
 
 }

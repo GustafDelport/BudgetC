@@ -13,7 +13,6 @@ import { BudgetItemCardComponent } from './budget-item-list/budget-item-card/bud
 import { EditItemModalComponent } from './edit-item-modal/edit-item-modal.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
-
 @NgModule({
   declarations: [
     AppComponent,
